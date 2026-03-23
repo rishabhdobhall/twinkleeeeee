@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Twinkle 💖✨</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+            background-color: #ffe6f2; /* Soft pastel pink background */
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Floating Emojis Styling */
+        .floating-emoji {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 5s linear infinite;
+            opacity: 0.7;
+            z-index: -1; /* Keeps them behind the main content */
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        h1 {
+            color: #ff4d94;
+            font-size: 2.5em;
+            margin: 20px;
+            padding: 0 20px;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.8);
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        button {
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: 0.2s all ease-in-out;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+        }
+
+        #yesBtn {
+            background-color: #ff85a2; /* Cute pinkish red */
+            color: white;
+            font-weight: bold;
+        }
+
+        #yesBtn:hover {
+            background-color: #ff4d94;
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #a4b0be; /* Soft gray for No */
+            color: white;
+            font-weight: bold;
+        }
+
+        img {
+            width: 250px;
+            height: auto;
+            border-radius: 20px;
+            z-index: 1;
+            box-shadow: 0px 4px 10px rgba(255, 105, 180, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <img id="bearImg" src="https://media.tenor.com/VIChDQ6sqEQAAAAj/milk-and-mocha-bear-couple.gif" alt="Cute Mochi Bears">
+    
+    <h1 id="question">Twinkle, will you be my Valentine? 🥺💖🌸</h1>
+
+    <div class="buttons" id="btnContainer">
+        <button id="yesBtn" onclick="sayYes()">Yes! 🥰</button>
+        <button id="noBtn" onclick="sayNo()">No 🙅‍♀️</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const question = document.getElementById("question");
+        const bearImg = document.getElementById("bearImg");
+        const btnContainer = document.getElementById("btnContainer");
+
+        // Cute personalized messages for Twinkle when she clicks "No"
+        const noTexts = [
+            "Are you sure, Twinkle? 🥺",
+            "Really really sure? 😭💔",
+            "Think again pretty please! 🙏✨",
+            "Twinkle, don't do this! 🥺🍓",
+            "You might regret this! 😢🎀",
+            "Have a heart! 💘😭",
+            "Don't be so cold! 🥶❄️",
+            "You're breaking my heart! 💔🐾",
+            "I'm gonna cry... 😭😭😭",
+            "Please say yes Twinkle! 💕🧸"
+        ];
+
+        // Sad/Begging Mochi GIFs that change with every "No" click
+        const mochiGifs = [
+            "https://media.tenor.com/c1h1QnB2bOAAAAAj/mochi-peachcat-mochi.gif", // Sad poke
+            "https://media.tenor.com/N4G6F5Z-vBwAAAAj/peach-cat.gif", // Begging
+            "https://media.tenor.com/hXzQ4XQ7fXAAAAAj/mochi-peachcat-cry.gif", // Crying puddle
+            "https://media.tenor.com/vHq4e_eB0mMAAAAj/mochi-cat.gif", // Angry crying
+            "https://media.tenor.com/Y3A2Pee4U5UAAAAj/sad-cat.gif", // Corner sad
+            "https://media.tenor.com/c1h1QnB2bOAAAAAj/mochi-peachcat-mochi.gif",
+            "https://media.tenor.com/N4G6F5Z-vBwAAAAj/peach-cat.gif",
+            "https://media.tenor.com/hXzQ4XQ7fXAAAAAj/mochi-peachcat-cry.gif",
+            "https://media.tenor.com/vHq4e_eB0mMAAAAj/mochi-cat.gif",
+            "https://media.tenor.com/Y3A2Pee4U5UAAAAj/sad-cat.gif"
+        ];
+
+        let clickCount = 0;
+        let yesSize = 1.5;
+
+        function sayNo() {
+            // Change the text of the No button
+            if (clickCount < noTexts.length) {
+                noBtn.innerText = noTexts[clickCount];
+                bearImg.src = mochiGifs[clickCount]; // Update the GIF to a sad one
+            } else {
+                noBtn.innerText = "Pretty please? 🥺💖";
+                bearImg.src = "https://media.tenor.com/hXzQ4XQ7fXAAAAAj/mochi-peachcat-cry.gif";
+            }
+            
+            // Make the Yes button bigger every time No is clicked
+            yesSize += 0.6;
+            yesBtn.style.fontSize = yesSize + "em";
+            yesBtn.style.padding = (yesSize * 10) + "px " + (yesSize * 20) + "px";
+            
+            clickCount++;
+        }
+
+        function sayYes() {
+            // Change everything to a happy state!
+            question.innerText = "Ok yayyy!! I knew you'd say yes, Twinkle! 🥰💖🎉🌸";
+            // Happy kissing Mochi bears GIF
+            bearImg.src = "https://media.tenor.com/gUiu1zyxfzYAAAAj/bear-kiss-bear-kisses.gif"; 
+            btnContainer.style.display = "none"; // Hide the buttons
+            
+            // Trigger a massive emoji explosion
+            for(let i=0; i<30; i++) {
+                setTimeout(createFloatingEmoji, i * 100);
+            }
+        }
+
+        // Background Floating Emojis Generator
+        function createFloatingEmoji() {
+            const emojiArr = ['🌸', '💖', '✨', '🎀', '🍓', '🧸', '🥰', '🍡'];
+            const emoji = document.createElement("div");
+            emoji.classList.add("floating-emoji");
+            emoji.innerText = emojiArr[Math.floor(Math.random() * emojiArr.length)];
+            
+            // Randomize starting position and animation duration
+            emoji.style.left = Math.random() * 100 + "vw";
+            emoji.style.animationDuration = (Math.random() * 3 + 3) + "s"; // between 3s and 6s
+            
+            document.body.appendChild(emoji);
+            
+            // Remove emoji after it floats up to keep DOM clean
+            setTimeout(() => {
+                emoji.remove();
+            }, 6000);
+        }
+
+        // Generate some emojis immediately on page load
+        setInterval(createFloatingEmoji, 400);
+
+    </script>
+</body>
+</html>
